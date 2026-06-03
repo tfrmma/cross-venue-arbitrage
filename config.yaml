@@ -1,0 +1,169 @@
+log_level: INFO
+
+# ---- venues ----
+venues:
+  binance:
+    enabled: true
+    required: true
+    futures: true
+    api_key: "YOUR_BINANCE_API_KEY"
+    api_secret: "YOUR_BINANCE_SECRET"
+    symbols:
+      - BTCUSDT
+      - ETHUSDT
+
+  bybit:
+    enabled: true
+    required: false
+    category: linear
+    api_key: "YOUR_BYBIT_API_KEY"
+    api_secret: "YOUR_BYBIT_SECRET"
+    symbols:
+      - BTCUSDT
+      - ETHUSDT
+
+  kraken:
+    enabled: true
+    required: false
+    api_key: "YOUR_KRAKEN_API_KEY"
+    api_secret: "YOUR_KRAKEN_SECRET"
+    symbols:
+      - BTC/USD
+      - ETH/USD
+
+  hyperliquid:
+    enabled: true
+    required: false
+    private_key: "YOUR_ETH_PRIVATE_KEY"
+    symbols:
+      - BTC
+      - ETH
+
+  dydx:
+    enabled: false  # needs dydx-v4-client installed
+    required: false
+    mnemonic: "YOUR_MNEMONIC"
+    address: "dydx1..."
+    subaccount_id: 0
+    symbols:
+      - BTC-USD
+      - ETH-USD
+
+  lighter:
+    enabled: false
+    required: false
+    private_key: "YOUR_ETH_PRIVATE_KEY"
+    executor_contract: "0x..."
+    market_ids:
+      BTC: 0
+      ETH: 1
+    symbols:
+      - BTC
+      - ETH
+
+# ---- strategy ----
+strategy:
+  min_net_pnl_bps: 3.0       # minimum spread after fees to trigger execution
+  max_size_usd: 25000.0
+  dex_venues:
+    - lighter
+    - dydx
+
+  arb_pairs:
+    - buy_venue: binance
+      sell_venue: bybit
+      symbol: BTCUSDT
+      type: perp_perp
+      max_size_usd: 20000.0
+
+    - buy_venue: bybit
+      sell_venue: binance
+      symbol: BTCUSDT
+      type: perp_perp
+      max_size_usd: 20000.0
+
+    - buy_venue: binance
+      sell_venue: hyperliquid
+      symbol: BTCUSDT
+      type: perp_perp
+      max_size_usd: 15000.0
+
+    - buy_venue: hyperliquid
+      sell_venue: binance
+      symbol: BTCUSDT
+      type: perp_perp
+      max_size_usd: 15000.0
+
+    - buy_venue: binance
+      sell_venue: lighter
+      symbol: BTCUSDT
+      type: cex_dex
+      max_size_usd: 10000.0
+
+  fees:
+    binance:
+      maker_bps: 2.0
+      taker_bps: 4.0
+      min_size: 0.001
+      max_size: 10.0
+
+    bybit:
+      maker_bps: 1.0
+      taker_bps: 6.0
+      min_size: 0.001
+      max_size: 10.0
+
+    kraken:
+      maker_bps: 2.0
+      taker_bps: 5.0
+      min_size: 0.0001
+      max_size: 5.0
+
+    hyperliquid:
+      maker_bps: 1.0
+      taker_bps: 3.5
+      min_size: 0.001
+      max_size: 10.0
+
+    lighter:
+      maker_bps: 0.0
+      taker_bps: 5.0
+      gas_usd: 0.20
+      lp_fee_bps: 5.0
+      min_size: 0.001
+      max_size: 5.0
+
+    dydx:
+      maker_bps: 0.0
+      taker_bps: 5.0
+      gas_usd: 0.05
+      min_size: 0.001
+      max_size: 5.0
+
+# ---- risk ----
+risk:
+  audit_interval_s: 1.0
+  rebalance_check_interval_s: 60.0
+  rebalance_threshold_pct: 0.25    # rebalance if any venue drifts >25% from target
+
+  delta_threshold_usd: 3000.0      # warn if net delta exceeds this
+  
+  target_venue_allocation:
+    binance: 0.40
+    bybit: 0.25
+    hyperliquid: 0.20
+    kraken: 0.15
+
+  circuit_breaker:
+    max_consecutive_failures: 5
+    max_drawdown_usd: 500.0
+    max_slippage_bps: 15.0
+    stale_feed_threshold_ms: 2000.0
+    max_open_notional_usd: 200000.0
+
+# ---- execution ----
+execution:
+  max_leg_wait_us: 500000     # 500ms - if a leg takes longer than this, something's wrong
+  dex_venues:
+    - lighter
+    - dydx

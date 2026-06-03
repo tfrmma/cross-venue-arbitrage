@@ -1,0 +1,10 @@
+aiohttp>=3.9.0
+websockets>=12.0
+web3>=6.0.0
+eth-account>=0.10.0
+PyYAML>=6.0
+numpy>=1.26.0
+pydantic>=2.5.0
+
+# optional - needed for dYdX v4
+# dydx-v4-client>=0.3.0
