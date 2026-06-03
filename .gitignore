@@ -1,0 +1,37 @@
+# python
+*.log
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+*.egg-info/
+dist/
+build/
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# secrets / config local
+.env
+.env.*
+config.local.yaml
+*_local.yaml
+secrets.yaml
+*.key
+*.pem
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# engine runtime
+arb_engine.log
+*.log.*
