@@ -1,4 +1,14 @@
 """
+@file router.py
+@author Taha - Algorithmic Trader
+@brief Institutional-grade cross-venue-arbitrage.
+
+@note This is a public structural showcase. For full production-grade 
+      deployment, architecture consulting, or recruitment inquiries:
+      Contact: email: fadilrezokt@gmail.com / linkedin.com/in/tahaotc
+"""
+
+"""
 Execution router. The part where you actually lose money if you get it wrong.
 
 Key invariant: never leave a naked leg open.
