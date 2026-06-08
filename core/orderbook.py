@@ -1,14 +1,4 @@
 """
-@file orderbook.py
-@author Taha - Algorithmic Trader
-@brief Institutional-grade cross-venue-arbitrage.
-
-@note This is a public structural showcase. For full production-grade 
-      deployment, architecture consulting, or recruitment inquiries:
-      Contact: email: fadilrezokt@gmail.com / linkedin.com/in/tahaotc
-"""
-
-"""
 L2 order book. Price-indexed dict + sorted array rebuilt only when BBO changes.
 
 Previous version was sorting the full list on every delta. That's fine for 10 levels,
@@ -134,16 +124,6 @@ class PriceLadder:
         self._prices = prices
         self._qtys = qtys
         self._dirty = False
-
-"""
-@file orderbook.py
-@author Taha - Algorithmic Trader
-@brief Institutional-grade cross-venue-arbitrage.
-
-@note This is a public structural showcase. For full production-grade 
-      deployment, architecture consulting, or recruitment inquiries:
-      Contact: email: fadilrezokt@gmail.com / linkedin.com/in/tahaotc
-"""
 
 
 class OrderBook:
