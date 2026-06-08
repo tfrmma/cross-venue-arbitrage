@@ -1,14 +1,4 @@
 """
-@file engine.py
-@author Taha - Algorithmic Trader
-@brief Institutional-grade cross-venue-arbitrage.
-
-@note This is a public structural showcase. For full production-grade 
-      deployment, architecture consulting, or recruitment inquiries:
-      Contact: email: fadilrezokt@gmail.com / linkedin.com/in/tahaotc
-"""
-
-"""
 Cross-venue arbitrage engine.
 Hyperliquid / Binance / Kraken / Bybit / dYdX / Lighter.
 
@@ -181,16 +171,6 @@ class ArbEngine:
     def handle_signal(self) -> None:
         log.info("signal received - shutting down")
         self._shutdown_event.set()
-
-"""
-@file engine.py
-@author Taha - Algorithmic Trader
-@brief Institutional-grade cross-venue-arbitrage.
-
-@note This is a public structural showcase. For full production-grade 
-      deployment, architecture consulting, or recruitment inquiries:
-      Contact: email: fadilrezokt@gmail.com / linkedin.com/in/tahaotc
-"""
 
 
 def setup_logging(level: str = "INFO") -> None:
